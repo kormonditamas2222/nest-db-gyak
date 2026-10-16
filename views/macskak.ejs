@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macskák</title>
+</head>
+<body>
+    <h1>Macskák kilistázva</h1>
+    <table style="border: solid 1px black;">
+        <thead>
+            <th>Azonosító</th>
+            <th>Súly</th>
+            <th>Szem szín</th>
+            <th>Gazda azonosító</th>
+            <th>Játék azonosító</th>
+        </thead>
+        <tbody>
+            <% macskak.forEach(macska => { %>
+                <tr>
+                    <td><%= macska.id %></td>
+                    <td><%= macska.suly %></td>
+                    <td><%= macska.szem_szin %></td>
+                    <td><%= macska.gazdi_id %></td>
+                    <td><%= macska.jatek_id %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -9,7 +9,23 @@ export class AppController {
   @Render('index')
   getHello() {
     return {
-      title: 'My First NestJS App'
+      title: 'Macskák adatbázis'
     }
+  }
+
+  @Get("macskak")
+  @Render("macskak")
+  async getMacskak() {
+    return {
+      macskak: await this.appService.getMacskak()
+    };
+  }
+
+  @Get("jatekok")
+  @Render("jatekok")
+  async getJatekok() {
+    return {
+      jatekok: await this.appService.getJatekok()
+    };
   }
 }
