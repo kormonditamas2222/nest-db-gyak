@@ -1,5 +1,6 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, Render } from '@nestjs/common';
 import { AppService } from './app.service.js';
+import { CreateJatekDto } from './CreateJatek.dto.js';
 
 @Controller()
 export class AppController {
@@ -27,5 +28,30 @@ export class AppController {
     return {
       jatekok: await this.appService.getJatekok()
     };
+  }
+
+  @Get("macskaKeres")
+  @Render("kereses")
+  async getMacskaBySzemSzin(@Query("szemszin") szemszin: string) {
+    if (!szemszin) {
+      return {
+        macskak: await this.appService.getMacskak()
+      };
+    }
+    return {
+      macskak: await this.appService.getMacskaBySzemSzin(szemszin)
+    };
+  }
+
+  @Get("ujJatek")
+  @Render("jatekForm")
+  getNewForm() {
+
+  }
+
+  @Post("ujJatek")
+  async ujJatek(@Body() body: CreateJatekDto) {
+    const jatek = await this.appService.ujJatek(body.nev);
+    return "Sikeres beszúrás" + JSON.stringify(jatek);
   }
 }

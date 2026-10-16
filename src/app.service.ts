@@ -25,4 +25,18 @@ export class AppService {
     const [results] = await mysqlConnection.execute("SELECT id, nev FROM jatekok");
     return results as Jatek[];
   }
+
+  async getMacskaBySzemSzin(szemszin: string) {
+    const [results] = await mysqlConnection.execute("SELECT id, suly, szem_szin, gazdi_id, jatek_id FROM macskak WHERE szem_szin = ?", [szemszin]);
+    return results as Macska[];
+  }
+
+  async ujJatek(nev: string) {
+    const [results] = await mysqlConnection.execute("INSERT INTO jatekok (nev) VALUES (?)", [nev])
+    const rows = results as any;
+    return {
+      id: rows.insertId,
+      nev
+    } as Jatek;
+  }
 }
